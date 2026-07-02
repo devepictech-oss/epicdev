@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Epic Dev — Independent mobile app studio building Android and iOS apps for media, productivity, and everyday utilities.">
+  <title>Epic Dev — Mobile App Development Studio</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --border: #2a2a2a;
+      --gold: #ffd700;
+      --gold-dim: #c9a800;
+      --text: #f5f5f5;
+      --muted: #999;
+      --accent: #1a1a1a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 56px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #111 0%, var(--bg) 100%);
+    }
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .hero-badge {
+      background: var(--accent);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    section { padding: 44px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    p { color: var(--muted); margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .card p { font-size: 0.92rem; margin-bottom: 0; }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 16px;
+    }
+    .app-card:last-child { margin-bottom: 0; }
+    .app-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gold);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+    .app-meta { flex: 1; min-width: 200px; }
+    .app-meta p { font-size: 0.92rem; }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 8px;
+      margin-right: 6px;
+    }
+    .badge-live { border-color: #2d5a2d; color: #6fcf6f; }
+    .badge-soon { border-color: #4a4a2a; color: var(--gold-dim); }
+
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 11px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .play-btn:hover { background: var(--gold-dim); text-decoration: none; }
+    .play-btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: default;
+    }
+    .play-btn-outline:hover { background: transparent; text-decoration: none; }
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .app-store-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .app-store-btn:hover { background: var(--accent); }
+
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .feature-tag {
+      background: var(--accent);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .process-list { list-style: none; margin-top: 8px; }
+    .process-list li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .process-list li:last-child { border-bottom: none; }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--gold);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .step-body h3 { font-size: 1rem; margin-bottom: 4px; }
+    .step-body p { font-size: 0.9rem; margin: 0; }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .tech-pill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .contact-list { list-style: none; margin-top: 8px; }
+    .contact-list li {
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-list strong { color: var(--text); }
+
+    footer {
+      padding: 36px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 600px) {
+      .app-header { flex-direction: column; }
+      .play-btn { width: 100%; justify-content: center; }
+      .store-buttons { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">EPIC DEV</div>
+      <p class="tagline">
+        An independent mobile app studio crafting useful Android and iOS applications
+        for media, productivity, and everyday life.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge">Android &amp; iOS</span>
+        <span class="hero-badge">Media &amp; Utility Apps</span>
+        <span class="hero-badge">User-First Design</span>
+        <span class="hero-badge">Privacy Focused</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- About -->
+    <section>
+      <h2>Who We Are</h2>
+      <p>
+        Epic Dev is a mobile app development studio dedicated to building Android and iOS applications
+        that solve real problems. We design, develop, and maintain our own apps — from idea
+        and prototype through launch, updates, and long-term support on Google Play and the App Store.
+      </p>
+      <p>
+        Our focus is on tools that are fast, intuitive, and reliable. We believe great mobile
+        apps should work offline where possible, respect user privacy, and stay out of the way
+        while getting the job done.
+      </p>
+      <div class="stat-row" style="margin-top:24px;">
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Platforms — Android &amp; iOS</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">In-House Development</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Free</span>
+          <span class="stat-label">Apps with Premium Options</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Global</span>
+          <span class="stat-label">Available Worldwide</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- What we build -->
+    <section>
+      <h2>What We Build</h2>
+      <p>We develop mobile apps across several categories, always with simplicity and performance in mind.</p>
+      <div class="grid-2" style="margin-top:20px;">
+        <div class="card">
+          <div class="card-icon">🎬</div>
+          <h3>Media &amp; Video Tools</h3>
+          <p>Video editing, conversion, compression, and audio extraction apps that process files directly on your device.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎵</div>
+          <h3>Audio Utilities</h3>
+          <p>Audio trimmers, converters, mergers, and mixers for creators, musicians, and everyday users.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Productivity Apps</h3>
+          <p>Lightweight tools that help users get things done faster — without bloat or unnecessary complexity.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Utility Apps</h3>
+          <p>Practical everyday apps for file management, format conversion, and device-side processing tasks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we develop -->
+    <section>
+      <h2>How We Develop</h2>
+      <p>Every app we ship follows a consistent development philosophy built around the people who use our products.</p>
+      <ul class="process-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Research &amp; Design</h3>
+            <p>We identify real user needs and design clean, focused interfaces that are easy to navigate on any screen size.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Native Mobile Development</h3>
+            <p>Our apps are built natively for Android and iOS using modern frameworks, ensuring smooth performance and deep OS integration.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>On-Device Processing</h3>
+            <p>Wherever possible, data stays on your phone. Media conversion and editing happen locally — no cloud upload required.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3>Test, Launch &amp; Improve</h3>
+            <p>We publish on Google Play and the App Store, listen to user feedback, and ship regular updates with new features and improvements.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Technology -->
+    <section>
+      <h2>Technology</h2>
+      <p>We use modern mobile development tools and libraries to deliver fast, stable apps.</p>
+      <div class="tech-list">
+        <span class="tech-pill">Kotlin</span>
+        <span class="tech-pill">Swift</span>
+        <span class="tech-pill">Jetpack Compose</span>
+        <span class="tech-pill">SwiftUI</span>
+        <span class="tech-pill">Android SDK</span>
+        <span class="tech-pill">iOS SDK</span>
+        <span class="tech-pill">Material Design 3</span>
+        <span class="tech-pill">FFmpeg</span>
+        <span class="tech-pill">ExoPlayer</span>
+        <span class="tech-pill">Google Play Billing</span>
+        <span class="tech-pill">Firebase Analytics</span>
+        <span class="tech-pill">AdMob</span>
+      </div>
+    </section>
+
+    <!-- Our Apps -->
+    <section>
+      <h2>Our Apps</h2>
+      <p>Apps published and maintained by Epic Dev on Google Play and the App Store.</p>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div style="display:flex; gap:14px; align-items:flex-start; flex:1;">
+            <div class="app-icon">EC</div>
+            <div class="app-meta">
+              <h3>Epic Converter</h3>
+              <p>Our flagship all-in-one media toolkit. Convert, trim, merge, compress, and edit audio &amp; video — 17+ tools in one app.</p>
+              <span class="badge badge-live">Live on Google Play</span>
+              <span class="badge">Media &amp; Utility</span>
+              <span class="badge">Free · Premium available</span>
+            </div>
+          </div>
+          <a class="play-btn" href="https://play.google.com/store/apps/details?id=com.epictech.epicconverter">
+            ▶ Get on Google Play
+          </a>
+        </div>
+        <div class="feature-grid">
+          <span class="feature-tag">Video Trim</span>
+          <span class="feature-tag">Video Convert</span>
+          <span class="feature-tag">Compress</span>
+          <span class="feature-tag">Merge</span>
+          <span class="feature-tag">GIF Maker</span>
+          <span class="feature-tag">Speed Control</span>
+          <span class="feature-tag">Crop &amp; Rotate</span>
+          <span class="feature-tag">Resize</span>
+          <span class="feature-tag">Reverse</span>
+          <span class="feature-tag">Audio Trim</span>
+          <span class="feature-tag">Audio Convert</span>
+          <span class="feature-tag">Audio Merge</span>
+          <span class="feature-tag">Mixer</span>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="app-header">
+          <div style="display:flex; gap:14px; align-items:flex-start; flex:1;">
+            <div class="app-icon">FR</div>
+            <div class="app-meta">
+              <h3>Framera — Frame Capture</h3>
+              <p>Extract high-quality still images from any video. Scrub frame by frame, adjust playback speed, and save watermark-free photos in JPEG, PNG, WEBP, or HEIC — all processed privately on your device.</p>
+              <span class="badge badge-live">Live on Google Play</span>
+              <span class="badge badge-live">Live on App Store</span>
+              <span class="badge">Media &amp; Utility</span>
+              <span class="badge">Free · Premium available</span>
+            </div>
+          </div>
+          <div class="store-buttons">
+            <a class="play-btn" href="https://play.google.com/store/apps/details?id=com.epicdev.videotophoto">
+              ▶ Get on Google Play
+            </a>
+            <a class="play-btn app-store-btn" href="https://apps.apple.com/in/app/framera-frame-capture/id6780235372">
+              Get on App Store
+            </a>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <span class="feature-tag">Frame-by-Frame Scrub</span>
+          <span class="feature-tag">Playback Speed</span>
+          <span class="feature-tag">JPEG Export</span>
+          <span class="feature-tag">PNG Export</span>
+          <span class="feature-tag">WEBP Export</span>
+          <span class="feature-tag">HEIC Export</span>
+          <span class="feature-tag">No Watermarks</span>
+          <span class="feature-tag">On-Device Processing</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section>
+      <h2>Our Principles</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Privacy First</h3>
+          <p>Your files stay on your device. We don't upload your media to our servers.</p>
+        </div>
+        <div class="card">
+          <h3>Simple by Design</h3>
+          <p>No clutter. Every screen is designed to get you to the result as quickly as possible.</p>
+        </div>
+        <div class="card">
+          <h3>Always Improving</h3>
+          <p>We ship updates regularly based on user feedback and new Android capabilities.</p>
+        </div>
+        <div class="card">
+          <h3>Accessible to All</h3>
+          <p>Our apps are free to download with optional premium features for power users.</p>
+        </div>
+        <div class="card">
+          <h3>Reliable Performance</h3>
+          <p>Optimized for a wide range of Android devices, from budget phones to flagships.</p>
+        </div>
+        <div class="card">
+          <h3>Responsive Support</h3>
+          <p>We read every email and work to resolve issues and feature requests promptly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section>
+      <h2>Contact &amp; Legal</h2>
+      <p>Have a question, feature request, or partnership inquiry? We'd love to hear from you.</p>
+      <ul class="contact-list" style="margin-top:16px;">
+        <li>
+          <strong>General &amp; Support:</strong>
+          <a href="mailto:devepictech@gmail.com">devepictech@gmail.com</a>
+        </li>
+        <li>
+          <strong>Developer Name:</strong> Epic Dev
+        </li>
+        <li>
+          <strong>Platforms:</strong> Google Play Store (Android) · Apple App Store (iOS)
+        </li>
+        <li>
+          <strong>Privacy Policy:</strong>
+          <a href="https://sites.google.com/view/epic-mp3-converter/home" target="_blank" rel="noopener">Epic Converter Privacy Policy</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Epic Dev. All rights reserved.</p>
+      <p style="margin-top:10px;">
+        <a href="https://play.google.com/store/apps/details?id=com.epictech.epicconverter">Epic Converter</a>
+        &nbsp;·&nbsp;
+        <a href="https://play.google.com/store/apps/details?id=com.epicdev.videotophoto">Framera</a>
+        &nbsp;·&nbsp;
+        <a href="https://apps.apple.com/in/app/framera-frame-capture/id6780235372">Framera (iOS)</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:devepictech@gmail.com">Contact</a>
+        &nbsp;·&nbsp;
+        <a href="https://sites.google.com/view/epic-mp3-converter/home">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
